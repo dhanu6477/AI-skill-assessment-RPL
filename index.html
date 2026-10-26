@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillBridge RPL | AI-Assisted Skill Assessment Tool for Recognition of Prior Learning</title>
+  <meta name="description" content="College prototype web application demonstrating AI-assisted preliminary skill evaluation for Recognition of Prior Learning (RPL).">
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Chart.js for Interactive Visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Project Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+</head>
+<body>
+
+  <!-- 1. Prominent Academic Prototype Notice Banner -->
+  <aside class="prototype-disclaimer-bar" role="alert">
+    <div class="container disclaimer-content">
+      <span class="prototype-tag">Academic Prototype / Demo</span>
+      <span>
+        <strong>Notice:</strong> This website is an educational demonstration tool developed for a college assessment project. 
+        Evaluations and scores are algorithmic simulations for demonstration and do <strong>not</strong> constitute an accredited or certified RPL qualification.
+      </span>
+    </div>
+  </aside>
+
+  <!-- 2. Sticky Navigation Bar -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="#home" class="brand-logo" data-target="home">
+        <div class="logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">SkillBridge RPL</span>
+          <span class="brand-tagline">AI Prior Learning Assessment</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-link nav-link-active" data-target="home">Home</a></li>
+          <li><a href="#assessment" class="nav-link" data-target="assessment">Skill Assessment</a></li>
+          <li><a href="#dashboard" class="nav-link" data-target="dashboard">Results Dashboard</a></li>
+          <li><a href="#history" class="nav-link" data-target="history">Assessment History</a></li>
+          <li><a href="#about" class="nav-link" data-target="about">About RPL</a></li>
+          <li><a href="#assessment" class="btn btn-sm nav-cta-btn action-start-assessment" data-target="assessment">Get Started &rarr;</a></li>
+        </ul>
+      </nav>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="mobile-menu-btn" id="mobile-nav-toggle" aria-label="Toggle navigation menu">
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-menu-drawer hidden" id="mobile-menu-drawer">
+      <a href="#home" class="nav-link" data-target="home">Home</a>
+      <a href="#assessment" class="nav-link" data-target="assessment">Skill Assessment</a>
+      <a href="#dashboard" class="nav-link" data-target="dashboard">Results Dashboard</a>
+      <a href="#history" class="nav-link" data-target="history">Assessment History</a>
+      <a href="#about" class="nav-link" data-target="about">About RPL</a>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       VIEW 1: HOME & INTRODUCTION
+       ======================================================================== -->
+  <main id="view-home" class="view-pane">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-pill-badge">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+            </svg>
+            <span>Recognition of Prior Learning (RPL) Diagnostic Engine</span>
+          </div>
+          
+          <h1 class="hero-title">
+            Bridge Informal Experience into <span class="gradient-text">Recognized Qualifications</span>
+          </h1>
+          
+          <p class="hero-description">
+            Evaluate your self-taught capabilities, freelance tenure, and informal work history. 
+            Our prototype AI rubric identifies your competency level, maps strengths, pinpoints critical skill gaps, and recommends targeted bridging modules for RPL qualification.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn btn-primary btn-lg action-start-assessment" data-target="assessment">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+              </svg>
+              Start Free Assessment
+            </button>
+            <button class="btn btn-secondary btn-lg" data-target="history">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              View Sample Results
+            </button>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-num">6</div>
+              <div class="stat-label">Vocational Tracks</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">60+</div>
+              <div class="stat-label">Competency Benchmarks</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">100%</div>
+              <div class="stat-label">Client-Side Demo</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Hero Visual Card -->
+        <div class="hero-visual-card">
+          <div class="hvc-header">
+            <span class="badge badge-purple">Simulated RPL Audit</span>
+            <span class="text-xs text-slate-400">Sample Candidate: Alex Morgan</span>
+          </div>
+
+          <div class="hvc-gauge-preview">
+            <div class="hvc-gauge-circle">
+              <span class="hvc-gauge-val">82</span>
+            </div>
+            <div class="hvc-gauge-info">
+              <h6>Level 3: Practitioner Competence</h6>
+              <p>Standard RPL Qualification Recommended</p>
+              <span class="status-pill badge-blue text-xs mt-1">75% Credit Waiver Ready</span>
+            </div>
+          </div>
+
+          <div class="hvc-metrics-stack">
+            <div class="hvc-metric-row">
+              <span class="text-slate-600 font-medium">Core Competencies</span>
+              <div class="hvc-metric-bar">
+                <div class="hvc-metric-fill bg-blue" style="width: 83%; background: #2563EB;"></div>
+              </div>
+              <span class="font-bold text-slate-800">29/35</span>
+            </div>
+            <div class="hvc-metric-row">
+              <span class="text-slate-600 font-medium">Practical Evidence</span>
+              <div class="hvc-metric-bar">
+                <div class="hvc-metric-fill" style="width: 87%; background: #7C3AED;"></div>
+              </div>
+              <span class="font-bold text-slate-800">26/30</span>
+            </div>
+            <div class="hvc-metric-row">
+              <span class="text-slate-600 font-medium">Work Experience</span>
+              <div class="hvc-metric-bar">
+                <div class="hvc-metric-fill" style="width: 80%; background: #3B82F6;"></div>
+              </div>
+              <span class="font-bold text-slate-800">16/20</span>
+            </div>
+            <div class="hvc-metric-row">
+              <span class="text-slate-600 font-medium">Foundational Creds</span>
+              <div class="hvc-metric-bar">
+                <div class="hvc-metric-fill" style="width: 73%; background: #10B981;"></div>
+              </div>
+              <span class="font-bold text-slate-800">11/15</span>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-3 border-top d-flex justify-content-between align-items-center">
+            <span class="text-xs text-slate-500">Fast 1-click test available in wizard</span>
+            <button class="btn btn-sm btn-outline-primary action-start-assessment" data-domain="software-dev">
+              Test This Profile &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What is RPL Section -->
+    <section class="features-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Vocational Education & Training</span>
+          <h2 class="section-title">What is Recognition of Prior Learning?</h2>
+          <p class="section-subtitle">
+            RPL is an internationally recognized pathway (UNESCO, ILO, NSQF) that certifies competencies acquired through informal work, self-study, and practical industry immersion.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <h3 class="feature-card-title">Value Informal Knowledge</h3>
+            <p class="feature-card-desc">
+              Validate hands-on knowledge gained outside traditional classrooms, enabling self-taught professionals and freelancers to earn formal academic recognition.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <h3 class="feature-card-title">AI Preliminary Screening</h3>
+            <p class="feature-card-desc">
+              Reduce evaluation bottlenecks by performing automated pre-checks that benchmark applicant portfolios against occupational competency frameworks.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+              </svg>
+            </div>
+            <h3 class="feature-card-title">Clear Bridging Pathways</h3>
+            <p class="feature-card-desc">
+              Instead of an outright pass/fail, receive a personalized gap analysis detailing specific learning modules required to achieve full qualification.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </div>
+            <h3 class="feature-card-title">Printable Audit Transcript</h3>
+            <p class="feature-card-desc">
+              Generate institutional-grade assessment transcripts formatted for A4 printing and PDF archival, complete with verification signature lines.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Available RPL Tracks Section -->
+    <section class="rpl-info-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Competency Frameworks</span>
+          <h2 class="section-title">Supported RPL Assessment Tracks</h2>
+          <p class="section-subtitle">
+            Choose an industry track aligned with your prior vocational experience to begin your diagnostic assessment.
+          </p>
+        </div>
+
+        <div class="domain-cards-grid" id="home-domain-cards-grid">
+          <!-- Populated dynamically by app.js -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       VIEW 2: SKILL ASSESSMENT FORM WIZARD
+       ======================================================================== -->
+  <main id="view-assessment" class="view-pane hidden">
+    <section class="assessment-section">
+      <div class="container">
+        <div class="wizard-card" id="assessment-wizard">
+          
+          <!-- Wizard Header -->
+          <div class="wizard-header">
+            <div class="wizard-title-row">
+              <div>
+                <h2 class="wizard-title">RPL Candidate Assessment</h2>
+                <p class="wizard-subtitle">Submit your prior education, work history, and practical evidence for AI evaluation.</p>
+              </div>
+
+              <!-- Quick Load Demo Selector -->
+              <div class="demo-selector-box">
+                <label for="load-demo-profile-select" class="text-xs text-slate-300 font-semibold">Load Sample Profile:</label>
+                <select id="load-demo-profile-select" class="demo-select-dropdown">
+                  <option value="">-- Choose Demo Candidate --</option>
+                  <option value="alex">Alex Morgan (Web Dev - 3.5 yrs)</option>
+                  <option value="priya">Priya Sharma (Data Analytics - 2.5 yrs)</option>
+                  <option value="jordan">Jordan Taylor (Cybersecurity - 2.0 yrs)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Wizard Progress Steps -->
+            <div class="wizard-progress-nav">
+              <div class="wizard-progress-bar-bg">
+                <div class="wizard-progress-bar-fill" id="wizard-progress-bar-fill"></div>
+              </div>
+
+              <div class="wizard-step-item active" data-step="1">
+                <div class="step-bubble">1</div>
+                <span class="step-label">Candidate Info</span>
+              </div>
+              <div class="wizard-step-item" data-step="2">
+                <div class="step-bubble">2</div>
+                <span class="step-label">Experience & Domain</span>
+              </div>
+              <div class="wizard-step-item" data-step="3">
+                <div class="step-bubble">3</div>
+                <span class="step-label">Skill Matrix</span>
+              </div>
+              <div class="wizard-step-item" data-step="4">
+                <div class="step-bubble">4</div>
+                <span class="step-label">Practical Evidence</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wizard Body -->
+          <div class="wizard-body">
+            
+            <!-- STEP 1: Personal & Education -->
+            <div class="step-pane active-step-pane" id="step-pane-1">
+              <h3 class="text-lg font-bold text-slate-800 mb-1">Step 1: Candidate Identification & Educational Background</h3>
+              <p class="text-sm text-slate-500 mb-4">Provide your identification details and any formal or non-formal educational credentials.</p>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="full-name" class="form-label">Full Legal Name <span class="req">*</span></label>
+                  <input type="text" id="full-name" class="form-input" placeholder="e.g. Alex Morgan" required>
+                  <span class="form-hint">Used on your formal RPL assessment transcript.</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="email-address" class="form-label">Contact Email Address <span class="req">*</span></label>
+                  <input type="email" id="email-address" class="form-input" placeholder="e.g. alex.morgan@example.com" required>
+                  <span class="form-hint">For assessment record association and feedback.</span>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="phone-number" class="form-label">Phone / WhatsApp (Optional)</label>
+                  <input type="tel" id="phone-number" class="form-input" placeholder="e.g. +1 (555) 019-2834">
+                </div>
+
+                <div class="form-group">
+                  <label for="education-level" class="form-label">Highest Prior Education Level <span class="req">*</span></label>
+                  <select id="education-level" class="form-select">
+                    <option value="self-taught">Self-Taught / Non-Formal Learning</option>
+                    <option value="high-school">High School Diploma / Secondary School</option>
+                    <option value="vocational">Vocational Certificate / Bootcamp Graduate</option>
+                    <option value="diploma">Polytechnic Diploma / Associate Degree</option>
+                    <option value="bachelor">Bachelor's Degree</option>
+                    <option value="master">Master's Degree or Higher</option>
+                  </select>
+                  <span class="form-hint">RPL specifically rewards non-formal and self-directed learners.</span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="certifications-field" class="form-label">Existing Certifications, Short Courses & Online Badges</label>
+                <textarea id="certifications-field" class="form-textarea" rows="2" placeholder="e.g. Coursera Google IT Support, freeCodeCamp Responsive Web Design, Meta Frontend Developer"></textarea>
+                <span class="form-hint">Separate multiple credentials with commas or newlines.</span>
+              </div>
+            </div>
+
+            <!-- STEP 2: Work Experience & Domain -->
+            <div class="step-pane hidden" id="step-pane-2">
+              <h3 class="text-lg font-bold text-slate-800 mb-1">Step 2: Vocational Track & Work Tenure</h3>
+              <p class="text-sm text-slate-500 mb-4">Select your target qualification sector and specify your hands-on industry background.</p>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="domain-select" class="form-label">Target RPL Qualification Track <span class="req">*</span></label>
+                  <select id="domain-select" class="form-select">
+                    <option value="software-dev">Software Engineering & Web Development</option>
+                    <option value="data-ai">Data Analytics & AI Fundamentals</option>
+                    <option value="cloud-devops">Cloud Architecture & DevOps Operations</option>
+                    <option value="ui-ux">UI/UX Product Design & User Research</option>
+                    <option value="cybersecurity">Cybersecurity & IT Infrastructure Defense</option>
+                    <option value="digital-marketing">Digital Marketing & Growth Strategy</option>
+                  </select>
+                  <span class="form-hint">The competency matrix will automatically adapt to this selection.</span>
+                </div>
+
+                <div class="form-group">
+                  <label for="experience-years" class="form-label">Total Hands-on Experience (Years) <span class="req">*</span></label>
+                  <input type="number" id="experience-years" class="form-input" min="0" max="40" step="0.5" placeholder="e.g. 3.5" required>
+                  <span class="form-hint">Include both freelance, full-time, and serious self-directed practice.</span>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="employment-type" class="form-label">Primary Engagement Modality <span class="req">*</span></label>
+                  <select id="employment-type" class="form-select">
+                    <option value="freelance">Freelance / Independent Contractor</option>
+                    <option value="full-time">Full-Time Industry Employment</option>
+                    <option value="part-time">Part-Time / Casual Industry Work</option>
+                    <option value="internship">Internship / Vocational Apprenticeship</option>
+                    <option value="self-employed">Small Business Owner / Self-Employed</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="role-title" class="form-label">Primary Role or Designation <span class="req">*</span></label>
+                  <input type="text" id="role-title" class="form-input" placeholder="e.g. Full-Stack Web Developer, Junior Data Analyst" required>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 3: Competencies & Skills -->
+            <div class="step-pane hidden" id="step-pane-3">
+              <div id="competencies-container">
+                <!-- Rendered dynamically by assessment.js based on selected domain -->
+              </div>
+
+              <!-- Custom Skill Addition -->
+              <div class="custom-skill-box">
+                <h5 class="text-sm font-bold text-slate-800 mb-1">Add Additional Custom Competency</h5>
+                <p class="text-xs text-slate-500 mb-3">Add niche tools or complementary skills not listed in the benchmark above.</p>
+                
+                <div class="custom-skill-inputs">
+                  <input type="text" id="custom-skill-input" class="form-input" style="max-width: 280px;" placeholder="e.g. GraphQL, Tailwind, Docker">
+                  <select id="custom-skill-level" class="form-select" style="max-width: 160px;">
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                    <option value="expert">Expert</option>
+                  </select>
+                  <button type="button" class="btn btn-secondary btn-sm" id="add-custom-skill-btn">
+                    + Add Skill Chip
+                  </button>
+                </div>
+
+                <div class="custom-skills-list" id="custom-skills-list"></div>
+              </div>
+            </div>
+
+            <!-- STEP 4: Practical Evidence & Attestation -->
+            <div class="step-pane hidden" id="step-pane-4">
+              <h3 class="text-lg font-bold text-slate-800 mb-1">Step 4: Practical Evidence & Work Samples</h3>
+              <p class="text-sm text-slate-500 mb-4">RPL certification requires demonstrable evidence of real-world application.</p>
+
+              <div class="form-group">
+                <label for="tools-used" class="form-label">Primary Tools, Frameworks, Software & Environments Used</label>
+                <input type="text" id="tools-used" class="form-input" placeholder="e.g. VS Code, React, Node.js, PostgreSQL, Git, Postman, Vercel">
+                <span class="form-hint">List technologies used during your actual commercial or client work.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="portfolio-url" class="form-label">Portfolio, GitHub, Live App, or Work Artifacts URL</label>
+                <input type="url" id="portfolio-url" class="form-input" placeholder="https://github.com/your-username or https://yourportfolio.com">
+                <span class="form-hint">Verifiable public links provide additional weighting in evidence scoring.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="practical-experience" class="form-label">Detailed Project & Practical Responsibilities Summary <span class="req">*</span></label>
+                <textarea id="practical-experience" class="form-textarea" rows="5" placeholder="Describe 2-3 substantial projects you have delivered. Mention client challenges solved, architectures designed, APIs integrated, or databases managed. Highlight tangible results." required></textarea>
+                <span class="form-hint">Our AI engine scans this summary for domain-specific terminology, technical depth, and quantifiable achievements. Minimum 25 characters required.</span>
+              </div>
+
+              <!-- Attestation Container -->
+              <div class="form-group" id="attestation-container">
+                <div class="attestation-box">
+                  <input type="checkbox" id="attestation-checkbox" required>
+                  <label for="attestation-checkbox" class="text-xs text-slate-700 leading-normal">
+                    <strong>Candidate Academic Attestation:</strong> I hereby certify that the prior experience and work descriptions submitted above reflect my genuine hands-on participation. I acknowledge that this tool is an <em>academic college prototype</em> designed for diagnostic simulation, and official RPL qualification requires human assessor portfolio verification.
+                  </label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Wizard Footer Controls -->
+          <div class="wizard-footer">
+            <button type="button" class="btn btn-secondary" id="step-prev-btn" style="display: none;">
+              &larr; Previous Step
+            </button>
+            <div style="margin-left: auto; display: flex; gap: 0.75rem;">
+              <button type="button" class="btn btn-primary" id="step-next-btn">
+                Next Step &rarr;
+              </button>
+              <button type="button" class="btn btn-primary" id="submit-assessment-btn" style="display: none;">
+                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                Calculate AI Assessment
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       VIEW 3: RESULTS DASHBOARD
+       ======================================================================== -->
+  <main id="view-dashboard" class="view-pane hidden">
+    <section class="dashboard-section">
+      <div class="container">
+        
+        <!-- Dashboard Top Banner Card -->
+        <div class="dash-top-card">
+          <div class="dash-banner-grid">
+            <div class="dash-candidate-header">
+              <span class="badge badge-purple mb-1">RPL Diagnostic Evaluation Summary</span>
+              <h2 id="dash-candidate-name">Candidate Evaluation</h2>
+              <div class="dash-meta-row">
+                <span>Assessment ID: <strong id="dash-assessment-id" class="text-slate-800">RPL-0000</strong></span>
+                <span>Date: <strong id="dash-assessment-date" class="text-slate-800">--</strong></span>
+                <span>Track: <strong id="dash-domain-title" class="text-slate-800">Software Engineering</strong></span>
+              </div>
+            </div>
+
+            <!-- Score Dial & Status -->
+            <div class="dash-score-dial-box">
+              <div class="circular-score-wrapper">
+                <svg class="score-svg" viewBox="0 0 120 120">
+                  <circle class="score-bg-ring" cx="60" cy="60" r="54"></circle>
+                  <circle class="score-fill-ring" id="dash-score-circle-svg" cx="60" cy="60" r="54"></circle>
+                </svg>
+                <div class="score-center-text">
+                  <span class="score-number" id="dash-overall-score-val">0</span>
+                  <span class="score-label">OUT OF 100</span>
+                </div>
+              </div>
+
+              <div>
+                <span class="status-pill badge-blue" id="dash-level-badge">Level 3: Practitioner</span>
+                <h4 class="text-sm font-bold text-slate-800 mt-1" id="dash-level-status">Standard RPL Qualified</h4>
+                <p class="text-xs text-slate-500 mt-1" id="dash-level-summary">Summary evaluation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Sub-Scores Metric Cards -->
+        <div class="dash-metrics-grid">
+          <div class="dash-metric-card">
+            <div class="dash-metric-title">Core Competencies</div>
+            <div id="dash-skills-score">
+              <div class="text-2xl font-bold text-slate-800">0 / 35</div>
+            </div>
+            <span class="text-xs text-slate-400 mt-1 block">Domain benchmark alignment</span>
+          </div>
+
+          <div class="dash-metric-card">
+            <div class="dash-metric-title">Practical Evidence</div>
+            <div id="dash-practical-score">
+              <div class="text-2xl font-bold text-slate-800">0 / 30</div>
+            </div>
+            <span class="text-xs text-slate-400 mt-1 block">Project depth & tools</span>
+          </div>
+
+          <div class="dash-metric-card">
+            <div class="dash-metric-title">Work Experience</div>
+            <div id="dash-exp-score">
+              <div class="text-2xl font-bold text-slate-800">0 / 20</div>
+            </div>
+            <span class="text-xs text-slate-400 mt-1 block">Documented tenure duration</span>
+          </div>
+
+          <div class="dash-metric-card">
+            <div class="dash-metric-title">Foundational Creds</div>
+            <div id="dash-edu-score">
+              <div class="text-2xl font-bold text-slate-800">0 / 15</div>
+            </div>
+            <span class="text-xs text-slate-400 mt-1 block">Prior courses & education</span>
+          </div>
+        </div>
+
+        <!-- Charts Grid (Radar & Bar) -->
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h4 class="font-bold text-slate-800">Competency Radar Matrix</h4>
+              <p class="text-xs text-slate-500">Multi-axis alignment across 5 RPL evaluation dimensions.</p>
+            </div>
+            <div class="chart-container-inner">
+              <canvas id="chart-radar-canvas"></canvas>
+            </div>
+          </div>
+
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <h4 class="font-bold text-slate-800">Dimension Score Breakdown</h4>
+              <p class="text-xs text-slate-500">Percentage mastery achieved in key performance indicators.</p>
+            </div>
+            <div class="chart-container-inner">
+              <canvas id="chart-bar-canvas"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Strengths & Gaps Grid -->
+        <div class="insights-grid">
+          <div class="insights-column">
+            <div class="d-flex align-items-center gap-2">
+              <span class="badge badge-emerald">Strengths Identified</span>
+              <h4 class="font-bold text-slate-800">Demonstrated Competencies</h4>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">Verified proficiencies meeting or exceeding benchmark requirements.</p>
+            <div class="insights-list" id="dash-strengths-container">
+              <!-- Dynamically rendered -->
+            </div>
+          </div>
+
+          <div class="insights-column">
+            <div class="d-flex align-items-center gap-2">
+              <span class="badge badge-rose">Skill Gaps</span>
+              <h4 class="font-bold text-slate-800">Identified Competency Gaps</h4>
+            </div>
+            <p class="text-xs text-slate-500 mt-1">Areas requiring bridging coursework or supplemental portfolio artifacts.</p>
+            <div class="insights-list" id="dash-gaps-container">
+              <!-- Dynamically rendered -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Learning Recommendations & Bridging Plan -->
+        <div class="recommendations-box">
+          <span class="badge badge-purple mb-1">RPL Bridging Roadmap</span>
+          <h4 class="font-bold text-slate-800">Personalized Learning & Qualification Next Steps</h4>
+          <p class="text-xs text-slate-500 mt-0.5">Recommended modules to close identified gaps and accelerate qualification readiness.</p>
+          <div class="recommendations-grid" id="dash-recommendations-container">
+            <!-- Dynamically rendered -->
+          </div>
+        </div>
+
+        <!-- Assessor Simulated Notes -->
+        <div class="assessor-notes-card">
+          <h5 class="text-sm font-bold text-slate-800 mb-1">Algorithmic Auditor Notes:</h5>
+          <p class="text-xs text-slate-600 leading-relaxed" id="dash-assessor-notes">
+            Preliminary evaluation pending human assessor review.
+          </p>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="dashboard-actions-bar">
+          <div>
+            <button type="button" class="btn btn-secondary trigger-retake-assessment">
+              &larr; Retake / New Assessment
+            </button>
+            <button type="button" class="btn btn-secondary" id="export-single-assessment-json">
+              Export JSON
+            </button>
+          </div>
+          <div>
+            <button type="button" class="btn btn-primary trigger-print-report">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+              </svg>
+              Print Formal RPL Transcript
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       VIEW 4: ASSESSMENT HISTORY
+       ======================================================================== -->
+  <main id="view-history" class="view-pane hidden">
+    <section class="history-section">
+      <div class="container">
+        <div class="history-card">
+          
+          <div class="history-header">
+            <div>
+              <div class="d-flex align-items-center gap-2">
+                <h2 class="text-xl font-bold text-slate-800">Assessment History Registry</h2>
+                <span class="badge badge-purple" id="history-count-badge">0 Records</span>
+              </div>
+              <p class="text-xs text-slate-500 mt-1">Review, print, and manage all simulated candidate RPL assessments stored in your browser.</p>
+            </div>
+            
+            <div class="d-flex gap-2">
+              <button type="button" class="btn btn-secondary btn-sm" id="history-reset-demo-btn">
+                Reset Sample Records
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" id="history-export-btn">
+                Export All (JSON)
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm text-rose-600" id="history-clear-btn">
+                Clear All
+              </button>
+            </div>
+          </div>
+
+          <!-- History Filter Bar -->
+          <div class="history-toolbar">
+            <input type="text" id="history-search-input" class="history-search-input" placeholder="Search by candidate name or domain...">
+            <span class="text-xs text-slate-400">Records persist locally across browser sessions.</span>
+          </div>
+
+          <!-- Table Container -->
+          <div id="history-table-container">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Candidate</th>
+                  <th>Target RPL Domain</th>
+                  <th>Score</th>
+                  <th>RPL Readiness Level</th>
+                  <th>Date Evaluated</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="history-table-body">
+                <!-- Dynamically rendered -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Empty State -->
+          <div id="history-empty-state" class="history-empty-state hidden">
+            <h4 class="font-bold text-slate-800">No Assessment Records Found</h4>
+            <p class="text-sm text-slate-500 mt-1 mb-4">Complete an assessment or click "Reset Sample Records" to load demonstration candidate profiles.</p>
+            <button class="btn btn-primary btn-sm action-start-assessment" data-target="assessment">
+              Take Skill Assessment Now &rarr;
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       VIEW 5: ABOUT RPL & METHODOLOGY
+       ======================================================================== -->
+  <main id="view-about" class="view-pane hidden">
+    <section class="about-section">
+      <div class="container">
+        <div class="about-card">
+          <span class="badge badge-purple mb-1">Academic Project Overview</span>
+          <h2 class="text-2xl font-bold text-slate-800 mb-2">Recognition of Prior Learning (RPL) & AI Framework</h2>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Recognition of Prior Learning (RPL) is an international pedagogical mechanism that formally assesses competencies acquired outside of traditional classrooms. 
+            Whether gained through commercial freelance tenure, self-directed open-source contributions, or enterprise on-the-job training, RPL provides an equitable pathway for individuals to convert real-world experience into official qualifications.
+          </p>
+
+          <div class="faq-list">
+            <div class="faq-item">
+              <h4 class="faq-question">1. How does this AI prototype evaluate prior learning?</h4>
+              <p class="faq-answer">
+                The diagnostic engine implements a 4-pillar multi-criteria evaluation rubric:
+                <br>• <strong>Domain Benchmark Matching (35%):</strong> Evaluates self-reported competencies against standardized industry matrices (e.g. Frontend, Backend, CI/CD, SQL).
+                <br>• <strong>Practical Narrative & Evidence Parsing (30%):</strong> Analyzes project descriptions for domain-specific technical vocabulary, quantifiable achievements, and verifiable portfolio URLs.
+                <br>• <strong>Tenure & Engagement Continuity (20%):</strong> Considers total years in industry, employment modality (freelance vs. full-time), and role depth.
+                <br>• <strong>Foundational & Non-Formal Credentials (15%):</strong> Rewards online courses, bootcamp certificates, and self-directed study.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <h4 class="faq-question">2. How are the 4 RPL Qualification Levels defined?</h4>
+              <p class="faq-answer">
+                • <strong>Level 4 (85-100 pts) - Advanced Mastery:</strong> Candidate demonstrates end-to-end industry competence with robust artifacts; fast-track full RPL credit recommended.
+                <br>• <strong>Level 3 (68-84 pts) - Practitioner Competence:</strong> Solid practical foundation with standard qualification eligibility; portfolio interview recommended.
+                <br>• <strong>Level 2 (45-67 pts) - Developing Competence:</strong> Partial RPL qualification with targeted bridging modules required for deficient competencies.
+                <br>• <strong>Level 1 (0-44 pts) - Foundational Awareness:</strong> Early-stage skill set; comprehensive preparatory coursework advised before formal assessment.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <h4 class="faq-question">3. Important Prototype & Academic Disclaimer</h4>
+              <p class="faq-answer">
+                This project was created for educational coursework demonstrating human-in-the-loop AI assistance for educational admissions and vocational audits. 
+                Scores, diagnostics, and bridging recommendations are algorithmic simulations intended to guide candidate self-preparation. In formal accredited institutions, final RPL awards are always determined by authorized human assessors and academic boards.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <h4 class="faq-question">4. Technology Stack & Deployment Architecture</h4>
+              <p class="faq-answer">
+                Built with modern, beginner-friendly Vanilla HTML5, CSS3, and ES6 JavaScript with zero external backend dependencies. Charting is powered by Chart.js (CDN). All assessment records are stored in browser localStorage. Designed for instant deployment to GitHub Pages or any static web host.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       MODAL: PRINTABLE FORMAL RPL ASSESSMENT REPORT
+       ======================================================================== -->
+  <div class="report-modal-overlay hidden" id="printable-report-modal">
+    <div class="report-modal-content">
+      
+      <!-- Modal Toolbar -->
+      <div class="report-modal-toolbar">
+        <div class="d-flex align-items-center gap-2">
+          <span class="badge badge-purple text-xs">Print Preview</span>
+          <span class="font-bold text-sm">Official RPL Assessment Transcript</span>
+        </div>
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-sm btn-primary" id="execute-print-btn">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+            </svg>
+            Print / Save PDF
+          </button>
+          <button type="button" class="btn btn-sm btn-secondary" id="close-report-modal-btn">
+            Close
+          </button>
+        </div>
+      </div>
+
+      <!-- Formal Report Paper Area -->
+      <div class="report-modal-scroll-area">
+        <div class="formal-report-paper" id="formal-report-paper">
+          
+          <div class="report-paper-header">
+            <div>
+              <h2 class="report-inst-title">COLLEGE OF VOCATIONAL EDUCATION & TECHNOLOGY</h2>
+              <h3 class="report-doc-title">RPL Prior Learning Diagnostic Assessment Transcript</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Automated Pre-Evaluation & Competency Audit Dossier</p>
+            </div>
+            <div style="text-align: right;">
+              <span class="text-xs font-bold text-slate-500 block">DOCUMENT REF:</span>
+              <span class="font-bold text-sm text-slate-800" id="rpt-assessment-id">RPL-0000</span>
+            </div>
+          </div>
+
+          <!-- Candidate Meta Table -->
+          <table class="report-meta-table">
+            <tr>
+              <td class="label-col">Candidate Name</td>
+              <td id="rpt-candidate-name">Alex Morgan</td>
+              <td class="label-col">Evaluation Date</td>
+              <td id="rpt-assessment-date">October 24, 2026</td>
+            </tr>
+            <tr>
+              <td class="label-col">Contact Email</td>
+              <td id="rpt-candidate-email">alex.morgan@example.com</td>
+              <td class="label-col">RPL Track Domain</td>
+              <td id="rpt-domain-title">Software Engineering</td>
+            </tr>
+            <tr>
+              <td class="label-col">Overall Readiness Index</td>
+              <td><strong class="text-base text-blue-600" id="rpt-overall-score">82 / 100</strong></td>
+              <td class="label-col">Qualification Readiness</td>
+              <td><span class="font-bold" id="rpt-level-badge">Level 3: Practitioner</span></td>
+            </tr>
+          </table>
+
+          <!-- Scores Summary Table -->
+          <div class="report-section-block">
+            <h4>1. Weighted Evaluation Criteria Breakdown</h4>
+            <table class="report-scores-summary-table">
+              <thead>
+                <tr>
+                  <th>Rubric Criterion</th>
+                  <th>Maximum Possible</th>
+                  <th>Candidate Earned</th>
+                  <th>Criterion Weight</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Domain Core Competencies & Skills</td>
+                  <td>35 Points</td>
+                  <td id="rpt-score-skills">29 / 35</td>
+                  <td>35%</td>
+                </tr>
+                <tr>
+                  <td>Practical Project Evidence & Narrative Depth</td>
+                  <td>30 Points</td>
+                  <td id="rpt-score-practical">26 / 30</td>
+                  <td>30%</td>
+                </tr>
+                <tr>
+                  <td>Work Experience Tenure & Continuity</td>
+                  <td>20 Points</td>
+                  <td id="rpt-score-exp">16 / 20</td>
+                  <td>20%</td>
+                </tr>
+                <tr>
+                  <td>Foundational & Non-Formal Credentials</td>
+                  <td>15 Points</td>
+                  <td id="rpt-score-edu">11 / 15</td>
+                  <td>15%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Diagnostic Strengths -->
+          <div class="report-section-block">
+            <h4>2. Recognized Prior Learning Strengths</h4>
+            <ul class="report-bullet-list" id="rpt-strengths-list"></ul>
+          </div>
+
+          <!-- Identified Skill Gaps -->
+          <div class="report-section-block">
+            <h4>3. Identified Competency Gaps & Bridging Requirements</h4>
+            <ul class="report-bullet-list" id="rpt-gaps-list"></ul>
+          </div>
+
+          <!-- Recommended Modules -->
+          <div class="report-section-block">
+            <h4>4. Prescribed Bridging Modules</h4>
+            <ul class="report-bullet-list" id="rpt-recs-list"></ul>
+          </div>
+
+          <!-- Auditor Summary Notes -->
+          <div class="report-section-block">
+            <h4>5. Auditor Assessment Remarks</h4>
+            <p class="text-xs text-slate-700 leading-relaxed" id="rpt-assessor-notes">
+              Candidate shows demonstrated practical competence suitable for standard RPL credit recognition.
+            </p>
+          </div>
+
+          <!-- Status Summary Box -->
+          <div class="report-section-block" style="background: #F8FAFC; border: 1px solid #E2E8F0; padding: 0.85rem; border-radius: 6px;">
+            <p class="text-xs text-slate-700" id="rpt-level-summary">
+              Candidate exhibits comprehensive domain competence.
+            </p>
+          </div>
+
+          <!-- Signatures -->
+          <div class="report-signatures-grid">
+            <div class="signature-line-box">
+              <div class="sig-title">Automated AI Assessment Auditor</div>
+              <div class="sig-subtitle">SkillBridge RPL Neural Rubric v2.4 (Prototype Engine)</div>
+            </div>
+            <div class="signature-line-box">
+              <div class="sig-title">Lead Human RPL Assessor / Academic Chair</div>
+              <div class="sig-subtitle">Department of Prior Learning & Vocational Ratification</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL: AI EVALUATION PROCESSING ANIMATION
+       ======================================================================== -->
+  <div class="evaluating-modal-overlay hidden" id="ai-evaluating-modal">
+    <div class="evaluating-card">
+      <div class="ai-pulse-spinner">
+        <div class="spinner-ring"></div>
+        <div class="spinner-ring-inner"></div>
+        <div class="spinner-core">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+      </div>
+
+      <h3 class="text-lg font-bold text-slate-800 mb-2">Analyzing Candidate Portfolio...</h3>
+      <p class="text-xs text-slate-500 mb-4" id="ai-loader-status">
+        Comparing self-reported competencies against industry benchmarks...
+      </p>
+
+      <div class="metric-bar-bg" style="height: 4px;">
+        <div class="metric-bar-fill" style="width: 75%;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       FOOTER
+       ======================================================================== -->
+  <footer class="app-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>SkillBridge RPL</h4>
+          <p>
+            An AI-Assisted Skill Assessment Tool for Recognition of Prior Learning (RPL). 
+            A modern, accessible college engineering project bridging informal practical experience into accredited vocational qualifications.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Quick Navigation</h5>
+          <ul class="footer-links">
+            <li><a href="#home" data-target="home">Home Page</a></li>
+            <li><a href="#assessment" data-target="assessment">Take Assessment</a></li>
+            <li><a href="#dashboard" data-target="dashboard">Results Dashboard</a></li>
+            <li><a href="#history" data-target="history">Assessment History</a></li>
+            <li><a href="#about" data-target="about">About RPL & Ethics</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Supported Tracks</h5>
+          <ul class="footer-links">
+            <li><a href="#assessment" class="action-start-assessment" data-domain="software-dev">Web Development</a></li>
+            <li><a href="#assessment" class="action-start-assessment" data-domain="data-ai">Data Analytics & AI</a></li>
+            <li><a href="#assessment" class="action-start-assessment" data-domain="cloud-devops">Cloud & DevOps</a></li>
+            <li><a href="#assessment" class="action-start-assessment" data-domain="ui-ux">UI/UX Product Design</a></li>
+            <li><a href="#assessment" class="action-start-assessment" data-domain="cybersecurity">Cybersecurity</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Academic Project Info</h5>
+          <p class="text-xs text-slate-400 leading-normal mb-2">
+            Developed for College Degree Assessment. Built with Vanilla HTML5, CSS3, and JavaScript.
+          </p>
+          <span class="badge badge-purple text-xs">GitHub Pages Ready</span>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 SkillBridge RPL Project. Educational Academic Demonstration Prototype.</span>
+        <span>Designed with HTML, CSS, JavaScript & Chart.js</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script Inclusions -->
+  <script src="js/ai-engine.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/assessment.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

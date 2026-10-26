@@ -1,0 +1,122 @@
+/* ==========================================================================
+   Print Stylesheet for Formal RPL Assessment Report
+   Optimized for Standard A4 Paper & PDF Generation
+   ========================================================================== */
+
+@media print {
+  /* Hide interactive web elements */
+  .prototype-disclaimer-bar,
+  .navbar,
+  .mobile-menu-drawer,
+  .app-footer,
+  .report-modal-toolbar,
+  .dashboard-actions-bar,
+  .history-toolbar,
+  .btn,
+  button,
+  .app-toast,
+  .wizard-footer,
+  .wizard-progress-nav,
+  #view-home,
+  #view-assessment,
+  #view-history,
+  #view-about {
+    display: none !important;
+  }
+
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .report-modal-overlay.hidden {
+    display: none !important;
+  }
+
+  /* Make open report modal full page on print */
+  .report-modal-overlay:not(.hidden) {
+    position: static !important;
+    background: none !important;
+    padding: 0 !important;
+    display: block !important;
+    inset: auto !important;
+  }
+
+  .report-modal-content {
+    box-shadow: none !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+    overflow: visible !important;
+  }
+
+  .report-modal-scroll-area {
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .formal-report-paper {
+    border: 1.5pt solid #000000 !important;
+    padding: 2cm !important;
+    margin: 0 !important;
+    page-break-after: avoid;
+    border-radius: 0 !important;
+  }
+
+  .formal-report-paper::before {
+    color: rgba(0, 0, 0, 0.08) !important;
+    font-size: 4rem !important;
+  }
+
+  .report-paper-header {
+    border-bottom: 2pt solid #000000 !important;
+  }
+
+  .report-inst-title {
+    color: #000000 !important;
+  }
+
+  .report-doc-title {
+    color: #1E3A8A !important;
+  }
+
+  .report-meta-table td,
+  .report-scores-summary-table th,
+  .report-scores-summary-table td {
+    border: 1pt solid #333333 !important;
+    color: #000000 !important;
+    padding: 4pt 6pt !important;
+  }
+
+  .report-meta-table td.label-col,
+  .report-scores-summary-table th {
+    background: #EEEEEE !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .report-signatures-grid {
+    margin-top: 2.5cm !important;
+    page-break-inside: avoid;
+  }
+
+  .signature-line-box {
+    border-top: 1pt solid #000000 !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 1.5cm;
+  }
+}
