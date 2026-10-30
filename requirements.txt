@@ -1,0 +1,5 @@
+# SkillBridge RPL - AI Server Python Dependencies
+# The included server.py uses Python's standard library (urllib & http.server) with zero required external dependencies!
+# If you prefer to deploy using Flask or Gunicorn, you may install:
+# flask>=2.3.0
+# requests>=2.31.0

@@ -58,7 +58,27 @@ Traditional RPL evaluations are notoriously labor-intensive, requiring human ass
    - Formatted for clean **A4 paper and PDF export**.
    - Includes official academic header, candidate dossier, rubric breakdown, assessor signature lines, and academic demo watermark.
 
-8. **Ethical Academic Notice**:
+8. **Dual-Mode Floating Chatbot Assistant (NEW)**:
+   - **Floating Launcher Widget:** Modern floating bubble in the bottom-right corner of every page, responsive on mobile & desktop.
+   - **Mode 1: "Quick Help" (Predefined Offline FAQ Bot):**
+     - Instant client-side JavaScript answers without requiring an internet connection or backend server.
+     - Answers all primary questions:
+       1. *What is RPL?*
+       2. *How does skill assessment work?*
+       3. *How is my assessment score calculated?*
+       4. *How can I improve my skills?*
+       5. *What is the purpose of this project?*
+       6. *How can I get my assessment report?*
+     - Clickable FAQ suggestion chips and smart keyword recognition.
+     - Clear fallback message when a question is not recognized.
+   - **Mode 2: "AI Assistant" (Genuine Generative AI Chat):**
+     - Secure backend proxy integration (Google Gemini / OpenAI).
+     - Allows freeform questions about RPL, education, work experience, practical skills, and career development.
+     - Strict credential safety: API keys are never exposed in frontend code; keys are stored in `server/.env`.
+     - Honest, transparent status: If the AI backend is not running, clearly informs the user with setup instructions rather than faking AI answers.
+   - **Chat Interface:** Tabs switcher, user/bot message bubbles, typing loading indicator, clear-chat button, and backend configuration drawer.
+
+9. **Ethical Academic Notice**:
    - Prominently labeled across the site as an educational prototype for college coursework.
 
 ---
@@ -71,13 +91,24 @@ AI -Skill Assesment/
 ├── README.md             # Project documentation & GitHub Pages guide
 ├── css/
 │   ├── style.css         # Modern responsive theme (blue/purple/white, flex/grid)
+│   ├── chatbot.css       # Dedicated styles for the dual-mode chatbot widget
 │   └── print.css         # Dedicated print styles for A4 transcript export
 ├── js/
 │   ├── ai-engine.js      # RPL scoring rubric, competency matrices & gap generator
 │   ├── assessment.js     # Form validation, 4-step wizard & demo profile loader
+│   ├── chatbot.js        # Dual-mode chat controller (Quick Help FAQ + AI Assistant)
 │   ├── dashboard.js      # Visualizations, Chart.js graphs & metric cards
 │   ├── history.js        # LocalStorage persistence, JSON export & demo data
 │   └── app.js            # Main controller, navigation routing & print modal
+├── server/               # Secure backend AI proxy (keeps API keys private)
+│   ├── server.js         # Node.js backend server
+│   ├── server.py         # Python backend server
+│   ├── server.ps1        # Native Windows PowerShell backend (zero installation needed!)
+│   ├── .env.example      # Environment variables template
+│   ├── .env              # Active backend configuration (add your API key here)
+│   ├── package.json      # Node.js project manifest
+│   ├── requirements.txt  # Python requirements
+│   └── README.md         # Backend setup & cloud deployment guide
 └── assets/               # Placeholder for custom branding assets
 ```
 
@@ -105,6 +136,52 @@ If you wish to serve over local HTTP using PowerShell:
 # In the project directory, run:
 Start-Process "index.html"
 ```
+
+---
+
+## 💬 How to Test and Run the Chatbot (Both Modes)
+
+The website features a floating circular chat button in the bottom-right corner of every page. Click it to open the dual-mode assistant.
+
+### Testing Mode 1: "Quick Help" (Predefined Offline FAQ Bot)
+1. Open `index.html` in your browser.
+2. Click the floating chat button in the bottom-right corner.
+3. The widget opens directly into the **Quick Help** tab.
+4. **Click any FAQ chip** (e.g. *"What is RPL?"* or *"How is my assessment score calculated?"*) to receive an instant, formatted response.
+5. **Type a custom question:** Type *"How does assessment work?"* and press Enter to see keyword matching in action.
+6. **Test unrecognized query:** Type *"What is the weather?"* to observe the graceful fallback message with suggested FAQ chips.
+7. Click the **trash icon** in the chat header to test the **Clear Chat** feature.
+
+### Testing Mode 2: "AI Assistant" (Genuine AI Chatbot)
+
+#### A. When Backend is NOT running (or not yet configured):
+1. Switch to the **"AI Assistant"** tab.
+2. Type any question (e.g. *"How can a freelance web developer qualify for RPL?"*) and press Enter.
+3. The interface shows a typing indicator, followed by a friendly, honest notice explaining that the AI Assistant connects to a secure backend to safeguard API keys, with simple steps to start the server.
+4. The user can click *"Use Quick Help Instead"* to return to the offline bot immediately without interruptions.
+
+#### B. Enabling Genuine AI Responses (Optional):
+1. Open `server/.env` in any editor.
+2. Add a free Google Gemini API key:
+   ```env
+   GEMINI_API_KEY=AIzaSy...YourKeyHere
+   ```
+   *(Or an OpenAI key: `OPENAI_API_KEY=sk-...`)*
+3. Start the backend using any of the 3 supported runtimes:
+   - **Native Windows PowerShell (No installation needed!):**
+     ```powershell
+     powershell -ExecutionPolicy Bypass -File server/server.ps1
+     ```
+   - **Node.js:**
+     ```bash
+     node server/server.js
+     ```
+   - **Python:**
+     ```bash
+     python server/server.py
+     ```
+4. Ask any question in the **AI Assistant** tab. You will receive a live, streaming generative AI response!
+5. To test backend health directly in your browser, visit `http://localhost:3000/api/status`.
 
 ---
 

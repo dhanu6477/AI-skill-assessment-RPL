@@ -1778,8 +1778,8 @@ button, input, select, textarea {
 /* Toast Notifications */
 .app-toast {
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 5.75rem;
+  right: 1.5rem;
   z-index: 110;
   background: #1E293B;
   color: #FFFFFF;

@@ -1,0 +1,12 @@
+{
+  "name": "skillbridge-rpl-ai-server",
+  "version": "1.0.0",
+  "description": "Secure AI Chatbot backend proxy for SkillBridge RPL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["rpl", "ai", "gemini", "openai", "skill-assessment"],
+  "author": "College Engineering Capstone Team",
+  "license": "MIT"
+}
